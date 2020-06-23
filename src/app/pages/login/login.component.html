@@ -7,16 +7,16 @@
                     Login
                 </span>
 
-                <span *ngIf="registroForm.submitted && registroForm.controls.email.errors" class="text-danger animated fadeIn">El correo es obligatorio</span>
+                <span *ngIf="registroForm.submitted && registroForm.controls.email.errors" class="text-danger animated fadeIn">El usuario es necesario</span>
                 <div class="wrap-input100 m-b-16">
-                    <input class="input100" type="email" name="email" [(ngModel)]="usuario.email" required email placeholder="Email">
+                    <input class="input100" type="text" name="email" [(ngModel)]="usuario.email" required placeholder="Nombre">
 
                     <span class="focus-input100"></span>
                 </div>
 
-                <span *ngIf="registroForm.submitted && registroForm.controls.password.errors" class="text-danger animated fadeIn">La contraseña debe de ser más de 6 letras</span>
+                <span *ngIf="registroForm.submitted && registroForm.controls.password.errors" class="text-danger animated fadeIn">La contraseña es necesaria</span>
                 <div class="wrap-input100 m-b-16" data-validate="Password is required">
-                    <input class="input100" type="password" name="password" [(ngModel)]="usuario.password" required minlength="6" placeholder="Password">
+                    <input class="input100" type="password" name="password" [(ngModel)]="usuario.password" required placeholder="Password">
                     <span class="focus-input100"></span>
                 </div>
 
@@ -28,11 +28,6 @@
                         </label>
                     </div>
 
-                    <div>
-                        <a routerLink="/registro" class="txt1">
-                            ¿No tienes cuenta?
-                        </a>
-                    </div>
                 </div>
 
                 <div class="container-login100-form-btn m-t-17">

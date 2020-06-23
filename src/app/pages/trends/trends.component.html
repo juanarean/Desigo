@@ -1,0 +1,40 @@
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/home">
+    <img src="../../../assets/images/icons/solo_logo_basis.png" width="50" height="50" alt="Al home" loading="lazy">
+  </a>
+</nav>
+
+<div class="flex" *ngIf="chartCargada">
+  <div class="flex-item">
+    <div style="display: block;">
+    <canvas baseChart width="600" height="250"
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [colors]="lineChartColors"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"
+                [plugins]="lineChartPlugins"></canvas>
+    </div>
+  </div>
+  <!-- <div class="flex-item">
+    <table class="table table-responsive table-condensed">
+      <tr>
+        <th *ngFor="let label of lineChartLabels">{{label}}</th>
+      </tr>
+      <tr *ngFor="let d of lineChartData; let i=index" [class]="'line-'+i">
+        <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
+      </tr>
+    </table>
+    <button mat-button mat-raised-button color="primary" (click)="changeColor()">Recolor</button>
+  </div> -->
+</div>
+
+<ul class="list-group">
+  <li class="list-group-item d-flex justify-content-between align-items-center" href="" *ngFor="let item of valores">
+    {{item.Timestamp}}
+    <div>
+      <span class="badge badge-primary badge-pill mr-sm-2">{{item.Value}}</span>
+    </div>
+  </li>
+</ul>

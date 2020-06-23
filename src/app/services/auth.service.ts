@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { UsuarioModel } from '../models/usuario.model';
 import { map } from 'rxjs/operators'
 
@@ -8,13 +8,11 @@ import { map } from 'rxjs/operators'
 })
 export class AuthService {
 
-  private url = 'https://identitytoolkit.googleapis.com/v1';
+  private url = 'https://EGEON.sanabria.local:8080/api';
   private API_KEY = 'AIzaSyBXE1YNraaBNEXECbeTqOilI6ZWQ1hh8HQ';
 
   userToken: string = '';
 
-  // https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]
-  // https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[API_KEY]
 
   constructor(
     private http: HttpClient
@@ -26,15 +24,26 @@ export class AuthService {
 
   login(usuario: UsuarioModel) {
     const authData = {
-      email: usuario.email,
+      username: usuario.email,
       password: usuario.password,
+      grant_type: 'password',
       // ...usuario,
-      returnSecureToken: true
+      //returnSecureToken: true
     };
 
-    return this.http.post(`${this.url}/accounts:signInWithPassword?key=${this.API_KEY}`, authData).pipe(map(resp => {
+    const httpParams = new HttpParams()
+    .set("username", usuario.email)
+    .set("password", usuario.password)
+    .set("grant_type", "password");
+
+    const header = new HttpHeaders();
+
+    header.append("Content-Type", "application/x-www-form-urlencoded");
+    header.append("Host", "EGEON.sanabria.local");
+
+    return this.http.post(`${this.url}/token`, httpParams, { headers : header}).pipe(map(resp => {
       console.log("Entro al map del rxjs");
-      this.guardarToken(resp['idToken']);
+      this.guardarToken(resp['access_token']);
       return resp;
     }));
     
@@ -44,12 +53,11 @@ export class AuthService {
     const authData = {
       email: usuario.email,
       password: usuario.password,
-      // ...usuario,
       returnSecureToken: true
     };
 
     return this.http.post(`${this.url}/accounts:signUp?key=${this.API_KEY}`, authData).pipe(map(resp => {
-      this.guardarToken(resp['idToken']);
+      this.guardarToken(resp['access_token']);
       return resp;
     }));
   }

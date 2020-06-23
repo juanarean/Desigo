@@ -1,3 +1,19 @@
-<p>
-  home works!
-</p>
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/home">
+    <img src="../../../assets/images/icons/solo_logo_basis.png" width="50" height="50" alt="Al home" loading="lazy">
+  </a>
+  <form class="form-inline" (ngSubmit)="buscar()">
+    <input class="form-control mr-sm-2" name="textSearch" [(ngModel)]="textSearch" type="search" placeholder="Busqueda" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+  </form>
+</nav>
+
+<ul class="list-group" *ngIf="mostraDatos">
+  <li class="list-group-item d-flex justify-content-between align-items-center" href="" *ngFor="let item of datos">
+    {{item.Nombre}}
+    <div>
+      <span class="badge badge-primary badge-pill mr-sm-2">{{item.Valor}}</span>
+      <a [routerLink]="['/trend', item.ObjectId]" class="badge badge-info">Trend</a>
+    </div>
+  </li>
+</ul>
