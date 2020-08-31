@@ -34,16 +34,16 @@ export class TrendsComponent implements OnInit {
           id: 'y-axis-0',
           position: 'left',
         },
-        {
-          id: 'y-axis-1',
-          position: 'right',
-          gridLines: {
-            color: 'rgba(255,0,0,0.3)',
-          },
-          ticks: {
-            fontColor: 'red',
-          }
-        }
+        // {
+        //   id: 'y-axis-1',
+        //   position: 'right',
+        //   gridLines: {
+        //     color: 'rgba(255,0,0,0.3)',
+        //   },
+        //   ticks: {
+        //     fontColor: 'red',
+        //   }
+        // }
       ]
     },
     annotation: {
@@ -65,22 +65,22 @@ export class TrendsComponent implements OnInit {
     },
   };
   public lineChartColors: Color[] = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-    { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
-    },
+    // { // grey
+    //   backgroundColor: 'rgba(148,159,177,0.2)',
+    //   borderColor: 'rgba(148,159,177,1)',
+    //   pointBackgroundColor: 'rgba(148,159,177,1)',
+    //   pointBorderColor: '#fff',
+    //   pointHoverBackgroundColor: '#fff',
+    //   pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    // },
+    // { // dark grey
+    //   backgroundColor: 'rgba(77,83,96,0.2)',
+    //   borderColor: 'rgba(77,83,96,1)',
+    //   pointBackgroundColor: 'rgba(77,83,96,1)',
+    //   pointBorderColor: '#fff',
+    //   pointHoverBackgroundColor: '#fff',
+    //   pointHoverBorderColor: 'rgba(77,83,96,1)'
+    // },
     { // red
       backgroundColor: 'rgba(255,0,0,0.3)',
       borderColor: 'red',
@@ -151,13 +151,9 @@ export class TrendsComponent implements OnInit {
     }
     this.lineChartData[0].data = this.listaValores;
     console.log(this.lineChartData);
-    this.lineChartColors[2].borderColor = 'green';
-    this.lineChartColors[2].backgroundColor = `rgba(0, 255, 0, 0.3)`;
     this.chartCargada = true;
   }
 
   public changeColor() {
-    this.lineChartColors[2].borderColor = 'green';
-    this.lineChartColors[2].backgroundColor = `rgba(0, 255, 0, 0.3)`;
   }
 }
