@@ -24,7 +24,7 @@ export class AuthService {
 
   login(usuario: UsuarioModel) {
     const authData = {
-      username: usuario.email,
+      username: usuario.nombre,
       password: usuario.password,
       grant_type: 'password',
       // ...usuario,
@@ -32,7 +32,7 @@ export class AuthService {
     };
 
     const httpParams = new HttpParams()
-    .set("username", usuario.email)
+    .set("username", usuario.nombre)
     .set("password", usuario.password)
     .set("grant_type", "password");
 
@@ -51,7 +51,7 @@ export class AuthService {
 
   nuevoUsuario(usuario: UsuarioModel) {
     const authData = {
-      email: usuario.email,
+      nombre: usuario.nombre,
       password: usuario.password,
       returnSecureToken: true
     };

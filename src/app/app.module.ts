@@ -1,24 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { RegistroComponent } from './pages/registro/registro.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { TrendsComponent } from './pages/trends/trends.component';
 import { ChartsModule } from 'ng2-charts';
+import { TokenService } from './interceptors/token.service';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegistroComponent,
     HomeComponent,
     LoginComponent,
-    TrendsComponent
+    TrendsComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +28,13 @@ import { ChartsModule } from 'ng2-charts';
     HttpClientModule,
     ChartsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

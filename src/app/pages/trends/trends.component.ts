@@ -16,9 +16,9 @@ import * as pluginAnnotations from 'chartjs-plugin-annotation';
 export class TrendsComponent implements OnInit {
 
   private objectId: string;
-  private valores: ValoresTrends [] = [];
+  public valores: ValoresTrends [] = [];
 
-  private chartCargada: boolean = false;
+  public chartCargada: boolean = false;
 
   public lineChartData: ChartDataSets[] = [ {data: [], label: 'nombre'} ];
 

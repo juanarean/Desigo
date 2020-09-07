@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { RespBusqueda, ValorPresente, TrendInfo, TrendValues } from '../models/searches.model'
 
 @Injectable({
@@ -21,57 +21,32 @@ export class SearchesService {
 
   buscarString (texto: String) {
 
-    this.userToken = localStorage.getItem('token')
-
-    const header = 
-    { 
-      "Authorization" : "Bearer " + this.userToken,
-    };
-
     const query = this.urlBusqueda + '*' + texto + '*' + this.optionsBusqueda;
 
-    return this.http.get<RespBusqueda>(query, { headers : new HttpHeaders(header)});
+    return this.http.get<RespBusqueda>(query);
 
   }
 
-  getValor (punto: string) {
-    this.userToken = localStorage.getItem('token')
-
-    const header = 
-    { 
-      "Authorization" : "Bearer " + this.userToken,
-    };
-
+  getValor(punto: string) {
+    
     const query = this.urlValue + punto + this.optionsValue;
 
-    return this.http.get<ValorPresente>(query, { headers : new HttpHeaders(header)});
+    return this.http.get<ValorPresente>(query);
 
   }
 
   getTrendId (objectId: string) {
-    this.userToken = localStorage.getItem('token')
-
-    const header = 
-    { 
-      "Authorization" : "Bearer " + this.userToken,
-    };
-
+  
     const query = this.urlTrendId + objectId; // + this.optionsTrendId;
 
-    return this.http.get<TrendInfo[]>(query, { headers : new HttpHeaders(header)});
+    return this.http.get<TrendInfo[]>(query);
   }
 
   getTrendValues (trendSeriesId: string) {
-    this.userToken = localStorage.getItem('token')
-
-    const header = 
-    { 
-      "Authorization" : "Bearer " + this.userToken,
-    };
 
     const query = this.urlTrendValues + trendSeriesId + this.optionsTrendValues;
 
-    return this.http.get<TrendValues>(query, { headers : new HttpHeaders(header)});
+    return this.http.get<TrendValues>(query);
   }
 
 }

@@ -20,8 +20,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.usuario = new UsuarioModel();
-    if (localStorage.getItem('email')) {
-      this.usuario.email = localStorage.getItem('email');
+    if (localStorage.getItem('usuario')) {
+      this.usuario.nombre = localStorage.getItem('usuario');
       this.recordarme = true;
     }
     this.auth.leerToken();
@@ -42,22 +42,21 @@ export class LoginComponent implements OnInit {
 
     Swal.showLoading();
     
-      this.auth.login(this.usuario).subscribe(resp => {
-        console.log(resp);
-        Swal.close();
+    this.auth.login(this.usuario).subscribe(resp => {
+      console.log(resp);
+      Swal.close();
+      if (this.recordarme) {
+        localStorage.setItem('usuario', this.usuario.nombre);
+      }
 
-        if (this.recordarme) {
-          localStorage.setItem('email', this.usuario.email);
-}
-
-        this.router.navigateByUrl('/home');
-      }, (err) => {
-          console.log(err.error.error.message);
-          Swal.fire({
-      type: 'error',
-      text: 'Credenciales Inválidas'
-    });
-      })
+      this.router.navigateByUrl('/home');
+    }, (err) => {
+        console.log(err.error.error.message);
+        Swal.fire({
+          type: 'error',
+          text: 'Credenciales Inválidas'
+        });
+    })
     
   }
 

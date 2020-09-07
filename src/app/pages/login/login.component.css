@@ -1,0 +1,17 @@
+.index {
+    width: 100%;
+    height: 100%;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+.pag-ppal {
+    width: 100%;
+    height: auto;
+    padding-top: 0px;
+    margin-top: 0px;
+    background-image: url(/assets/images/desigo-back.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

@@ -1,42 +1,44 @@
-<div class="limiter animated fadeInRight">
-    <div class="container-login100">
-        <div class="wrap-login100 p-t-50 p-b-90">
-            <form class="login100-form validate-form flex-sb flex-w" (ngSubmit)="login(registroForm)" #registroForm="ngForm">
+<div class="index pag-ppal">
+    <div class="limiter animated fadeInRight">
+        <div class="container-login100">
+            <div class="wrap-login100 p-t-50 p-b-90 ">
+                <form class="login100-form validate-form flex-sb flex-w" (ngSubmit)="login(registroForm)" #registroForm="ngForm">
 
-                <span class="login100-form-title p-b-51">
-                    Login
-                </span>
+                    <span class="login100-form-title p-b-51">
+                        Login
+                    </span>
 
-                <span *ngIf="registroForm.submitted && registroForm.controls.email.errors" class="text-danger animated fadeIn">El usuario es necesario</span>
-                <div class="wrap-input100 m-b-16">
-                    <input class="input100" type="text" name="email" [(ngModel)]="usuario.email" required placeholder="Nombre">
+                    <span *ngIf="registroForm.submitted && registroForm.controls.email.errors" class="text-danger animated fadeIn">El usuario es necesario</span>
+                    <div class="wrap-input100 m-b-16">
+                        <input class="input100" type="text" name="email" [(ngModel)]="usuario.nombre" required placeholder="Nombre">
 
-                    <span class="focus-input100"></span>
-                </div>
-
-                <span *ngIf="registroForm.submitted && registroForm.controls.password.errors" class="text-danger animated fadeIn">La contraseña es necesaria</span>
-                <div class="wrap-input100 m-b-16" data-validate="Password is required">
-                    <input class="input100" type="password" name="password" [(ngModel)]="usuario.password" required placeholder="Password">
-                    <span class="focus-input100"></span>
-                </div>
-
-                <div class="flex-sb-m w-full p-t-3 p-b-24">
-                    <div class="contact100-form-checkbox">
-                        <input [(ngModel)]="recordarme" class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                        <label class="label-checkbox100" for="ckb1">
-                            Recordar mi usuario
-                        </label>
+                        <span class="focus-input100"></span>
                     </div>
 
-                </div>
+                    <span *ngIf="registroForm.submitted && registroForm.controls.password.errors" class="text-danger animated fadeIn">La contraseña es necesaria</span>
+                    <div class="wrap-input100 m-b-16" data-validate="Password is required">
+                        <input class="input100" type="password" name="password" [(ngModel)]="usuario.password" required placeholder="Password">
+                        <span class="focus-input100"></span>
+                    </div>
 
-                <div class="container-login100-form-btn m-t-17">
-                    <button class="login100-form-btn" type="submit">
-                        Ingresar
-                    </button>
-                </div>
+                    <div class="flex-sb-m w-full p-t-3 p-b-24">
+                        <div class="contact100-form-checkbox">
+                            <input [(ngModel)]="recordarme" class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                            <label class="label-checkbox100" for="ckb1">
+                                Recordar mi usuario
+                            </label>
+                        </div>
 
-            </form>
+                    </div>
+
+                    <div class="container-login100-form-btn m-t-17">
+                        <button class="login100-form-btn" type="submit">
+                            Ingresar
+                        </button>
+                    </div>
+
+                </form>
+            </div>
         </div>
     </div>
 </div>

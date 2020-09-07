@@ -8,8 +8,8 @@ import { TrendsComponent } from './pages/trends/trends.component';
 
 const routes: Routes = [
   { path: 'login'   , component: LoginComponent },
-  { path: 'home'    , component: HomeComponent, canActivate: [ AuthGuard ] },
-  { path: 'trend/:id'   , component: TrendsComponent, canActivate: [ AuthGuard ] },
+  { path: 'home', component: HomeComponent }, // canActivate: [ AuthGuard ] },
+  { path: 'trend/:id', component: TrendsComponent }, // canActivate: [ AuthGuard ] },
   { path: '**', redirectTo: 'login' }
 ];
 

@@ -1,0 +1,13 @@
+<aside id="sidebar">
+    <a class="navbar-brand" routerLink="/home">
+        <img src="../../../assets/images/icons/solo_logo_basis.png" width="50" height="50" alt="Al home" loading="lazy">
+    </a>
+    <form class="form-inline" (ngSubmit)="reporte()">
+        <input class="form-control mr-sm-2" name="textSearch" [(ngModel)]="point" type="search" placeholder="Nombre" aria-label="Search">
+        <input class="form-control mr-sm-2" name="inicioSearch" [(ngModel)]="textSearch" type="search" placeholder="Busqueda" aria-label="Search">
+        <input class="form-control mr-sm-2" name="finSearch" [(ngModel)]="textSearch" type="search" placeholder="Busqueda" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+    </form>
+</aside>
+
+<div class="clearfix"></div>
