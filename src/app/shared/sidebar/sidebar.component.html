@@ -1,12 +1,26 @@
 <aside id="sidebar">
-    <a class="navbar-brand" routerLink="/home">
-        <img src="../../../assets/images/icons/solo_logo_basis.png" width="50" height="50" alt="Al home" loading="lazy">
-    </a>
-    <form class="form-inline" (ngSubmit)="reporte()">
-        <input class="form-control mr-sm-2" name="textSearch" [(ngModel)]="point" type="search" placeholder="Nombre" aria-label="Search">
-        <input class="form-control mr-sm-2" name="inicioSearch" [(ngModel)]="textSearch" type="search" placeholder="Busqueda" aria-label="Search">
-        <input class="form-control mr-sm-2" name="finSearch" [(ngModel)]="textSearch" type="search" placeholder="Busqueda" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+    <form class="form-inline mx-auto" [formGroup]="searchForm" (ngSubmit)="reporte()">
+        <div class="formulario-side">
+            <input class="form-control mt-2 mx-auto" formControlName="text" [(ngModel)]="punto" type="search" placeholder="Nombre del punto" aria-label="Search">
+             <div class="mt-2">
+                <input formControlName="fechaDesde" matInput [matDatepicker]="picker" placeholder="Desde">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </div>
+            <div>
+                <input formControlName="fechaHasta" matInput [matDatepicker]="picker2" placeholder="Hasta">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+            </div>
+            
+            <div class="row mt-2">
+                <div class="col text-danger">
+                    <p *ngIf="formIncompleto()">* Completar el formulario</p>
+                    <p *ngIf="fechasOk()">* Fechas erroneas</p>
+                </div>
+            </div>
+            <button class="btn btn-success mt-2 mx-auto" type="submit">Reporte</button>
+        </div>
     </form>
 </aside>
 

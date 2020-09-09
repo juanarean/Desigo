@@ -9,7 +9,6 @@ import { map } from 'rxjs/operators'
 export class AuthService {
 
   private url = 'https://EGEON.sanabria.local:8080/api';
-  private API_KEY = 'AIzaSyBXE1YNraaBNEXECbeTqOilI6ZWQ1hh8HQ';
 
   userToken: string = '';
 
@@ -42,24 +41,11 @@ export class AuthService {
     header.append("Host", "EGEON.sanabria.local");
 
     return this.http.post(`${this.url}/token`, httpParams, { headers : header}).pipe(map(resp => {
-      console.log("Entro al map del rxjs");
+      //console.log("Entro al map del rxjs");
       this.guardarToken(resp['access_token']);
       return resp;
     }));
     
-  }
-
-  nuevoUsuario(usuario: UsuarioModel) {
-    const authData = {
-      nombre: usuario.nombre,
-      password: usuario.password,
-      returnSecureToken: true
-    };
-
-    return this.http.post(`${this.url}/accounts:signUp?key=${this.API_KEY}`, authData).pipe(map(resp => {
-      this.guardarToken(resp['access_token']);
-      return resp;
-    }));
   }
 
   private guardarToken(idToken: string) {

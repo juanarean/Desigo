@@ -1,21 +1,34 @@
-<nav class="sidebar-nav">
+
+<nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" routerLink="/home">
         <img src="../../../assets/images/icons/solo_logo_basis.png" width="50" height="50" alt="Al home" loading="lazy">
     </a>
-    <form class="form-inline" (ngSubmit)="buscar()">
-        <input class="form-control mr-sm-2" name="textSearch" [(ngModel)]="textSearch" type="search" placeholder="Busqueda" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-    </form>
+        <form class="form-inline" (ngSubmit)="buscar()">
+            <input class="form-control mr-sm-2" name="textSearch" [(ngModel)]="textSearch" type="search" placeholder="Busqueda" aria-label="Search">
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
 </nav>
 
-<app-sidebar></app-sidebar>
+<div class="box-home">
 
-<ul class="list-group" *ngIf="mostraDatos">
-    <li class="list-group-item d-flex justify-content-between align-items-center" href="" *ngFor="let item of datos">
-        {{item.Nombre}}
-        <div>
-            <span class="badge badge-primary badge-pill mr-sm-2">{{item.Valor}}</span>
-            <a [routerLink]="['/trend', item.ObjectId]" class="badge badge-info">Trend</a>
-        </div>
-    </li>
-</ul>
+    <div class="sidebar-div">
+        <app-sidebar [punto]="puntoSelected" [puntoId]="puntoSelectedId" class="sidebar-comp"></app-sidebar>
+    </div>
+    
+    <div class="milista">
+    
+        <ul class="list-group" *ngIf="mostraDatos">
+            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let item of datos">
+                <button (click)="ponerPunto(item)">
+                    {{item.Nombre}}
+                </button> 
+                <div>
+                    <span class="badge badge-primary badge-pill mr-sm-2">{{item.Valor}}</span>
+                    <!-- <a [routerLink]="['/trend', item.ObjectId]" class="badge badge-info">Trend</a> -->
+                </div>
+            </li>
+        </ul>
+    
+    </div>
+
+</div>

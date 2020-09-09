@@ -1,34 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SearchesService } from 'src/app/services/searches.service';
 import { Router } from '@angular/router';
-import { RespBusqueda, ValorPresente } from '../../models/searches.model'
-import { NombreValor, ValoresTrends } from '../../models/valores.model'
+import { RespBusqueda } from '../../models/searches.model'
+import { NombreValor } from '../../models/valores.model'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  templateUrl: './home.component.html'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent  {
 
   textSearch: String;
   respBusqueda: RespBusqueda;
   datos: NombreValor[] = [];
   mostraDatos: boolean = false;
+  public puntoSelected: string;
+  public puntoSelectedId: string;
 
-  constructor(private search: SearchesService, private router: Router) { }
+  constructor(private searchService: SearchesService, private router: Router) { }
 
-  ngOnInit() {
-  }
 
   async buscar() {
     this.mostraDatos = false;
     this.datos = [];
-    //console.log(this.textSearch);
-    this.search.buscarString(this.textSearch).subscribe( res => {
-      this.respBusqueda = res;
-      console.log(res);
-      this.cargarDatos();
+    this.searchService.buscarString('*' + this.textSearch + '*').subscribe( res => {
+      if(res.Nodes[0]){
+        this.respBusqueda = res;
+        this.cargarDatos();
+      } else {
+        Swal.fire({
+          type: 'error',
+          text: 'El punto no existe'
+        });
+        return
+      }
     });
     
   }
@@ -36,13 +42,17 @@ export class HomeComponent implements OnInit {
   cargarDatos() {
     for (const iterator of this.respBusqueda.Nodes) {
       if(!iterator.Name.startsWith("Trend_")){
-        this.search.getValor(iterator.ObjectId).subscribe( res => {
+        this.searchService.getValor(iterator.ObjectId).subscribe( res => {
           this.datos.push({ Nombre : iterator.Name, Valor: res[0].Value.Value, ObjectId:iterator.ObjectId});
         });   
       }
     }
     this.mostraDatos = true;
-    //console.log(this.datos); 
+  }
+
+  ponerPunto(punto: NombreValor) {
+    this.puntoSelected = punto.Nombre;
+    this.puntoSelectedId = punto.ObjectId; 
   }
 
 }

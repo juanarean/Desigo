@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SearchesService } from 'src/app/services/searches.service';
-import { TrendValues, ValorPresente } from 'src/app/models/searches.model';
 import { ValoresTrends } from 'src/app/models/valores.model';
 import Swal from 'sweetalert2';
 import { ChartDataSets, ChartOptions } from 'chart.js';
@@ -10,12 +9,13 @@ import * as pluginAnnotations from 'chartjs-plugin-annotation';
 
 @Component({
   selector: 'app-trends',
-  templateUrl: './trends.component.html',
-  styleUrls: ['./trends.component.css']
+  templateUrl: './trends.component.html'
 })
 export class TrendsComponent implements OnInit {
 
   private objectId: string;
+  private from: string;
+  private to: string;
   public valores: ValoresTrends [] = [];
 
   public chartCargada: boolean = false;
@@ -99,7 +99,8 @@ export class TrendsComponent implements OnInit {
 
   constructor( private _route: ActivatedRoute, private _search: SearchesService, private router: Router ) {
     this.objectId = _route.snapshot.paramMap.get('id');
-    //console.log(this.objectId);
+    this.from = _route.snapshot.paramMap.get('from');
+    this.to = _route.snapshot.paramMap.get('to');
    }
 
   ngOnInit() {
@@ -112,7 +113,7 @@ export class TrendsComponent implements OnInit {
 
     this._search.getTrendId(this.objectId).subscribe( res => {
       if(res) {
-        this._search.getTrendValues(res[0].TrendseriesId).subscribe( res => {
+        this._search.getTrendValues(res[0].TrendseriesId,this.from,this.to).subscribe( res => {
           this.valores = res.Series;
           Swal.close();
           this.cargarGrafico();
@@ -147,7 +148,9 @@ export class TrendsComponent implements OnInit {
     for (let i = 0; i < this.valores.length; i++) {
       //console.log(parseFloat(this.valores[i].Value));
       this.listaValores.push(Number(this.valores[i].Value));
-      this.lineChartLabels.push(this.valores[i].Timestamp);
+      if(i%20) {
+        this.lineChartLabels.push(new Date(this.valores[i].Timestamp).toLocaleString());
+      }
     }
     this.lineChartData[0].data = this.listaValores;
     console.log(this.lineChartData);
